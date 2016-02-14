@@ -1,14 +1,67 @@
 $(document).ready(function(){
 
-    // 追加したい役職
+    // 職業リストを追加
     $.get("occupation.csv", function(data){
         var csvList = $.csv()(data);
         for (var i = 1; i < csvList.length ; i++) {
           // i=行 0=列
           var value = csvList[i][1];
           var name = csvList[i][0];
-          $("#job").append($('<option>').attr({ value: value }).text(name));
+          $("#occupation").append($('<option>').attr({ value: value }).text(name));
         }
+    });
+                  
+    // 技能リストを追加
+    $.get("skill.csv", function(data){
+        var csvList = $.csv()(data);
+        for (var i = 1; i < csvList.length ; i++) {
+          // i=行 0=列
+          var value = csvList[i][1];
+          var name = csvList[i][0];
+          $(".skill").append($('<option>').attr({ value: name }).text(name));
+        }
+    });
+                  
+    $(".skill").change(function(){
+       
+       var defaultInput = nextInput($(this));
+        var skillName = $(this).val();
+        csv("skill.csv", skillName, 1, defaultInput);
+                       
+    });
+                  
+    $(".skill_occupationpoint").change(function(){
+
+       var occupationPoint = parseInt($(this).val(), 10);
+                                       
+        var interestingInput = $(this).parent().parent().find(".skill_interestingpoint");
+        var interestingPoint = parseInt(occupationInput.val(), 10);
+                                        
+        var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
+        var defaultPoint = parseInt(defaultInput.val(), 10);
+                                        
+        var sum = interestingPoint + occupationPoint + defaultPoint;
+
+        var label = $(this).parent().parent().find(".skill_sum");
+        label.text(sum);
+
+    });
+                  
+    $(".skill_interestingpoint").change(function(){
+                                      
+        var interestingPoint = parseInt($(this).val(), 10);
+                                        
+        var occupationInput = $(this).parent().parent().find(".skill_occupationpoint");
+        var occupationPoint = parseInt(occupationInput.val(), 10);
+                                        
+        var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
+        var defaultPoint = parseInt(defaultInput.val(), 10);
+                                        
+        var sum = interestingPoint + occupationPoint + defaultPoint;
+
+        var label = $(this).parent().parent().find(".skill_sum");
+        label.text(sum);
+                                      
     });
                   
     $(".3d6rich").click(function(){
@@ -59,7 +112,7 @@ $(document).ready(function(){
         var value = $(this).val();
         $("#knowledge").val(value * 5);
                      
-                     $("#edu20").val(value * 20);
+                     $("#occupationpoint").val(value * 20);
         
     });
 

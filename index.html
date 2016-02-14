@@ -31,7 +31,7 @@ div{
     $.getScript("js/" + gametype + ".js", function(){});
 
     // セーブする要素IDリスト
-    var parameters = "name,job,school,comefrom,gender,age,playername,str,con,pow,dex,app,siz,int,edu,rich,san,idea,luck,knowledge,hp,mp,edu20,int10,db";
+    var parameters = "name,occupation,school,comefrom,gender,age,playername,str,con,pow,dex,app,siz,int,edu,rich,san,idea,luck,knowledge,hp,mp,occupationpoint,int10,db";
     var parameterLabels = parameters.split(',');
     
 </script>
@@ -57,10 +57,10 @@ div{
         </tr>
         
         <tr>
-            <th><label for="job" onclick="">職業</label></th>
-            <!-- <td><input id="job" type="text" /></td> -->
+            <th><label for="occupation" onclick="">職業</label></th>
             <td>
-                <select id="job" class="form-control">
+                <select id="occupation" class="form-control">
+                    <option></option>
                 </select>
             </td>
         </tr>
@@ -187,8 +187,8 @@ div{
                 </tr>
                 
                 <tr>
-                    <th><label for="edu20">職業技能ポイント</label></th>
-                    <td><input id="edu20" type="text" /></td>
+                    <th><label for="occupationpoint">職業技能ポイント</label></th>
+                    <td><input id="occupationpoint" type="text" /></td>
                 </tr>
                 
                 <tr>
@@ -209,13 +209,35 @@ div{
         
         <table>
         
+        <thead>
+            
+            <th></th>
+            <th>技能名</th>
+            <th>初期値</th>
+            <th>職業技能ポイント</th>
+            <th>興味技能ポイント</th>
+            <th>合計</th>
+            
+        </thead>
+        
+        <tbody>
+        
         <tr>
             <th>
-            <label for="skillA" onclick="">職業-探索技能1</label></th>
-            <td><input id="skillA" type="text" /></td>
-            <td><input id="skillA_value" type="text" /></td>
+            <label for="skillA" onclick="">技能A</label></th>
+            <td>
+                <select id="skillA" class="form-control skill">
+                    <option></option>
+                </select>
+            </td>
+            <td><input id="skillA_default" class="skill_defaultpoint" type="text" /></td>
+            <td><input id="skillA_occupationpoint" class="skill_occupationpoint" type="text" /></td>
+            <td><input id="skillA_interestingpoint" class="skill_interestingpoint" type="text" /></td>
+            <td><label id="skillA_sum" class="skill_sum"></label></td>
             </th>
         </tr>
+        
+        
         
         </tbody>
         

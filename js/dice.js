@@ -37,9 +37,19 @@ function prevInput (button) {
     return input;
 };
 
+function nextInput (object) {
+    var input = $(object).parent().next().children("input");
+    return input;
+};
+
 // 1つ前のラベルを取得する
 function prevLabel (input) {
     var label = $(input).parent().prev().children("label");
+    return label;
+};
+
+function nextLabel (object) {
+    var label = $(object).parent().next().children("label");
     return label;
 };
 
