@@ -1,6 +1,16 @@
 $(document).ready(function(){
+
+    // 追加したい役職
+    $.get("occupation.csv", function(data){
+        var csvList = $.csv()(data);
+        for (var i = 1; i < csvList.length ; i++) {
+          // i=行 0=列
+          var value = csvList[i][1];
+          var name = csvList[i][0];
+          $("#job").append($('<option>').attr({ value: value }).text(name));
+        }
+    });
                   
-                                    
     $(".3d6rich").click(function(){
                         
         var r = random(3, 18, 0);
@@ -9,6 +19,21 @@ $(document).ready(function(){
                         
     });
                   
+    $(".1d10p4").click(function(){
+                      
+                      var r = random(1, 10, 4);
+                      var input = prevInput($(this));
+                       input.val(r).trigger("change", true);
+                      
+                      });
+                  
+    $(".1d10m10").click(function(){
+                     
+         var r = random(1, 10, 0);
+         var input = prevInput($(this));
+         input.val(r * 10);
+         
+         });
 
     $("#int").change(function(){
                     
@@ -52,11 +77,27 @@ $(document).ready(function(){
        });
                 
                   
-                  $("#str").change(function(){
-                                   
-                                   $("#db").val(calcDB());
-                                   
-                                   });
+      $("#str").change(function(){
+                       
+                       $("#db").val(calcDB());
+                       
+                       });
+                  
+      $(".shortinsanity").click(function(){
+                          
+              var r = random(1, 10, 0);
+              var input = prevInput($(this));
+              csv("shortinsanity.csv", r, 1, input);
+              
+              });
+                  
+      $(".longinsanity").click(function(){
+                                
+            var r = random(1, 10, 0);
+            var input = prevInput($(this));
+            csv("longinsanity.csv", r, 1, input);
+            
+        });
                   
 });
 
@@ -75,7 +116,7 @@ function calcDB() {
     
     var value = str + siz;
     
-    if (2<= value && value <= 12) {
+    if (2 <= value && value <= 12) {
         return "-1D6";
     } else if (value <= 16) {
         return "-1D4";

@@ -2,8 +2,8 @@
 
 // m-n+xの乱数を生成して返却する
 function random (first, last, x) {
-    
-    var random = Math.floor(Math.random() * (last-first)) + first + 1;
+    // 0-15 + 3 -> 1-16 + 2
+    var random = Math.floor(Math.random() * (last - first + 1)) + first;
     random += x;
     
     return random;
@@ -118,6 +118,51 @@ $(document).ready(function(){
                        $(this).siblings().find("button").trigger("click",true);
                        
                        });
+                  
+                  $(".1d100").click(function(){
+                                  var input = prevInput($(this));
+                                  input.val(random(1, 100, 0)).trigger("change",true);
+                                  });
+                  
+                  $(".1d3").click(function(){
+                                    var input = prevInput($(this));
+                                    input.val(random(1, 3, 0)).trigger("change",true);
+                                    });
+                  
+                  $(".1d4").click(function(){
+                                    var input = prevInput($(this));
+                                    input.val(random(1, 4, 0)).trigger("change",true);
+                                    });
+                  
+                  $(".1d6").click(function(){
+                                  var input = prevInput($(this));
+                                  input.val(random(1, 6, 0)).trigger("change",true);
+                                  });
+                  
+                  $(".1d10").click(function(){
+                                  var input = prevInput($(this));
+                                  input.val(random(1, 10, 0)).trigger("change",true);
+                                  });
+                  
+                  $(".1d20").click(function(){
+                                   var input = prevInput($(this));
+                                   input.val(random(1, 20, 0)).trigger("change",true);
+                                   });
+                  
+                  $(".2d3").click(function(){
+                                    var input = prevInput($(this));
+                                    input.val(random(1, 6, 0)).trigger("change",true);
+                                    });
+                  
+                  $(".2d4").click(function(){
+                                  var input = prevInput($(this));
+                                  input.val(random(1, 8, 0)).trigger("change",true);
+                                  });
+                  
+                  $(".2d6").click(function(){
+                                  var input = prevInput($(this));
+                                  input.val(random(2, 12, 0)).trigger("change",true);
+                                  });
                   
                   $(".3d6").click(function(){
                                   var input = prevInput($(this));
