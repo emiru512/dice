@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+
+<title></title>
+
+<!-- Bootstrapの読み込み -->
+<link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Flat-UIの読み込み -->
+<link href="css/flat-ui.css" rel="stylesheet">
+
+<style type="text/css">
+div{
+    display:table;
+    margin:1%;
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="js/jquery_csv.js"></script>
+<script src="js/jquery_stringify.js"></script>
+<script src="js/dice.js"></script>
+
+<script type="text/javascript">
+    
+    var gametype = "cthulu";
+    
+    // 動的にjsファイルを読み込む
+    $.getScript("js/" + gametype + ".js", function(){});
+
+    // セーブする要素IDリスト
+    var parameters = "name,job,school,comefrom,gender,age,playername,str,con,pow,dex,app,siz,int,edu,rich,san,idea,luck,knowledge,hp,mp,edu20,int10,db";
+    var parameterLabels = parameters.split(',');
+    
+</script>
+
+
+
+</head>
+
+<body>
+    
+    <div>
+        
+        <table>
+        <thead><tr><th>プロフィール</th></tr></thead>
+        <tbody>
+        <tr>
+            <th>
+                <label for="name" onclick="">名前</label>
+            </th>
+            <td>
+                <input id="name" type="text" />
+            </td>
+        </tr>
+        
+        <tr>
+            <th><label for="job" onclick="">職業</label></th>
+            <td><input id="job" type="text" /></td>
+        </tr>
+        
+        <tr>
+            <th><label for="school" onclick="">学校/学位</label></th>
+            <td><input id="school" type="text" /></td>
+        </tr>
+        
+        <tr>
+            <th><label for="comefrom" onclick="">出身</label></th>
+            <td><input id="comefrom" type="text" /></td>
+        </tr>
+        
+        <tr>
+            <th><label for="gender" onclick="">性別</label></th>
+            <td><input id="gender" type="text" /></td>
+        </tr>
+        
+        <tr>
+            <th><label for="age" onclick="">年齢</label></th>
+            <td><input id="age" type="text" /></td>
+        </tr>
+        
+        <tr>
+            <th><label for="playername" onclick="">プレイヤー</label></th>
+            <td><input id="playername" type="text" /></td>
+        </tr>
+        
+        </tbody>
+        </table>
+        
+    </div>
+    
+    <div>
+        
+        <button class="triggerallrandom">すべて乱数で生成</button>
+        
+        <table>
+        
+            <thead><tr><th>能力名</th><th>能力値</th><th>ダイス</th></tr></thead>
+            <tbody>
+                <tr>
+                    <th><label for="str" onclick="">STR(筋力):</label></th>
+                    <td><input id="str" type="text" placeholder="STR" /></td>
+                    <td><button class="str 3d6">3D6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="con" onclick="">CON(体力):</label></th>
+                    <td><input id="con" type="text" placeholder="CON" /></td>
+                    <td><button class="con 3d6">3D6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="pow" onclick="">POW(精神力):</label></th>
+                    <td><input id="pow" type="text" placeholder="POW" />
+                        </td>
+                    <td><button class="pow 3d6">3D6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="dex" onclick="">DEX(敏捷性):</label></th>
+                    <td><input id="dex" type="text" placeholder="DEX" /></td>
+                    <td><button class="dex 3d6">3D6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="app" onclick="">APP(外見):</label></th>
+                    <td><input id="app" type="text" placeholder="APP" /></td>
+                    <td><button class="3d6">3D6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="siz" onclick="">SIZ(体格):</label></th>
+                    <td><input id="siz" type="text" placeholder="SIZ" /></td>
+                    <td><button class="2d6p6">2D6+6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="int" onclick="">INT(知性):</label></th>
+                    <td><input id="int" type="text" placeholder="INT" /></td>
+                    <td><button class="2d6p6 btn btn-primary">2D6+6</button></td>
+                </tr>
+                <tr>
+                    <th><label for="edu" onclick="">EDU(教育):</label></th>
+                    <td><input id="edu" type="text" placeholder="EDU" /></td>
+                    <td><button class="3d6p3">3D6+3</button></td>
+                </tr>
+                <tr>
+                    <th><label for="rich" onclick="">年収/財産:</label></th>
+                    <td><input id="rich" type="text" placeholder="" /></td>
+                    <td><button class="3d6rich">3D6</button></td>
+                </tr>
+            
+            </tbody>
+        
+            <tbody>
+                
+                <tr>
+                    <th><label for="san">正気度ポイント</label></th>
+                    <td><input id="san" type="text" /></td>
+                    <td><button class="add">+</button>
+                        <button class="subtract">-</button></td>
+                </tr>
+            
+                <tr>
+                    <th><label for="idea">アイデア</label></th>
+                    <td><input id="idea" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="luck">幸運</label></th>
+                    <td><input id="luck" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="knowledge">知識</label></th>
+                    <td><input id="knowledge" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="hp">耐久力</label></th>
+                    <td><input id="hp" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="mp">マジックポイント</label></th>
+                    <td><input id="mp" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="edu20">職業技能ポイント</label></th>
+                    <td><input id="edu20" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="int10">趣味技能ポイント</label></th>
+                    <td><input id="int10" type="text" /></td>
+                </tr>
+                
+                <tr>
+                    <th><label for="db">ダメージボーナス</label></th>
+                    <td><input id="db" type="text" /></td>
+                </tr>
+            
+            </tbody>
+        
+        <tbody>
+        
+        <tr>
+            <th>
+            <label for="skillA">職業-探索技能1</label></th>
+            <td><input id="skillA" type="text" /></td>
+            <td><input id="skillA_value" type="text" /></td>
+            </th>
+        </tr>
+        
+        </tbody>
+        
+        
+        </table>
+        
+    </div>
+    
+    <div>
+    
+    <textarea id="jsontextarea"></textarea>
+    <button class="save">コピー用に現在のデータを表示</button>
+    <button class="load btn-danger">ペーストして読み込み</button>
+    <br />
+    <button class="download">データをダウンロード</button>
+    
+    </div>
+
+</body>
+
+
+</html>
