@@ -25,7 +25,7 @@ div{
 
 <script type="text/javascript">
     
-    var gametype = "cthulu";
+    var gametype = "cthulhu";
     
     // 動的にjsファイルを読み込む
     $.getScript("js/" + gametype + ".js", function(){});
@@ -151,6 +151,14 @@ div{
                 </tr>
             
             </tbody>
+            
+        </table>
+        
+    </div>
+    
+    <div>
+        
+        <table>
         
             <tbody>
                 
@@ -202,12 +210,14 @@ div{
                 </tr>
             
             </tbody>
-        
-        <tbody>
-            
+    
         </table>
         
-        <table>
+    </div>
+    
+    <div>
+        
+        <table id="table_skill">
         
         <thead>
             
@@ -223,17 +233,16 @@ div{
         <tbody>
         
         <tr>
-            <th>
-            <label for="skillA" onclick="">技能A</label></th>
+            <th></th>
             <td>
-                <select id="skillA" class="form-control skill">
+                <select id="skill" class="form-control skill">
                     <option></option>
                 </select>
             </td>
-            <td><input id="skillA_default" class="skill_defaultpoint" type="text" /></td>
-            <td><input id="skillA_occupationpoint" class="skill_occupationpoint" type="text" /></td>
-            <td><input id="skillA_interestingpoint" class="skill_interestingpoint" type="text" /></td>
-            <td><label id="skillA_sum" class="skill_sum"></label></td>
+            <td><input id="skill_default" class="skill_defaultpoint" type="text" /></td>
+            <td><input id="skill_occupationpoint" class="skill_occupationpoint" type="text" /></td>
+            <td><input id="skill_interestingpoint" class="skill_interestingpoint" type="text" /></td>
+            <td><label id="skill_sum" class="skill_sum"></label></td>
             </th>
         </tr>
         

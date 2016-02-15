@@ -19,8 +19,14 @@ $(document).ready(function(){
           var value = csvList[i][1];
           var name = csvList[i][0];
           $(".skill").append($('<option>').attr({ value: name }).text(name));
+          // id(#name)要素をくわえる？
         }
     });
+  
+    // 最初の行を複製
+    $("#table_skill > tbody > tr:first").clone(true).appendTo(
+                                                             $("#table_skill > tbody")
+                                                             );
                   
     $(".skill").change(function(){
        
@@ -31,15 +37,19 @@ $(document).ready(function(){
     });
                   
     $(".skill_occupationpoint").change(function(){
-
+                                       
        var occupationPoint = parseInt($(this).val(), 10);
                                        
         var interestingInput = $(this).parent().parent().find(".skill_interestingpoint");
-        var interestingPoint = parseInt(occupationInput.val(), 10);
+        var interestingPoint = parseInt(interestingInput.val(), 10);
                                         
         var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
         var defaultPoint = parseInt(defaultInput.val(), 10);
-                                        
+                                       
+        if (isNaN(interestingPoint)) { interestingPoint = 0; }
+        if (isNaN(occupationPoint)) { occupationPoint = 0; }
+        if (isNaN(defaultPoint)) { defaultPoint = 0; }
+                                       
         var sum = interestingPoint + occupationPoint + defaultPoint;
 
         var label = $(this).parent().parent().find(".skill_sum");
@@ -56,6 +66,10 @@ $(document).ready(function(){
                                         
         var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
         var defaultPoint = parseInt(defaultInput.val(), 10);
+                                        
+        if (isNaN(interestingPoint)) { interestingPoint = 0; }
+        if (isNaN(occupationPoint)) { occupationPoint = 0; }
+        if (isNaN(defaultPoint)) { defaultPoint = 0; }
                                         
         var sum = interestingPoint + occupationPoint + defaultPoint;
 
