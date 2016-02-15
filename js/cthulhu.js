@@ -22,31 +22,29 @@ $(document).ready(function(){
           var value = csvList[i][2];
           // $(".skill").append($('<option>').attr({ value: name }).text(name));
           
-          var careerpointID = id + "careerpoint";
-          var pipointID = id + "pipoint";
+          var careerpointID = id + "_careerpoint";
+          var pipointID = id + "_pipoint";
           
           $("#table_skill > tbody").append('<tr>' +
                                            '<td>' +
                                            name +
                                            '</td>' +
                                            
-                                           '<td><input id="skill_default" class="skill_defaultpoint" type="text" value="' + value + '" /></td>' +
-                                           '<td><input id="skill_' + careerpointID + '" class="skill_careerpoint" type="text" /></td>' +
-                                           '<td><input id="skill_' + pipointID + '" class="skill_pipoint" type="text" /></td>' +
+                                           '<td><input class="skill_defaultpoint form-control" type="text" value="' + value + '" /></td>' +
+                                           '<td><input id="skill_' + careerpointID + '" class="skill_careerpoint form-control" type="text" /></td>' +
+                                           '<td><input id="skill_' + pipointID + '" class="skill_pipoint form-control" type="text" /></td>' +
                                            '<td><label class="skill_sum"></label></td>' +
                                            
                                            '</tr>');
+          $("#table_skill > tbody").trigger("create", true);
           
-          // リストにして、id(#name)要素をくわえる？
+          // リストにして、id(#name)要素をくわえる
           // さらに保存リストにid要素を加える
-          // これでok?
+          parameterLabels.push(careerpointID);
+          parameterLabels.push(pipointID);
+          
         }
     });
-  
-    // 最初の行を複製
-    $("#table_skill > tbody > tr:first").clone(true).appendTo(
-                                                             $("#table_skill > tbody")
-                                                             );
                   
     $(".skill").change(function(){
        
@@ -56,8 +54,9 @@ $(document).ready(function(){
                        
     });
                   
-    $(".skill_careerpoint").change(function(){
-                                       
+    // $(".skill_careerpoint").change(function(){
+    $(document).on("change", ".skill_careerpoint", function() {
+                                   
        var careerpoint = parseInt($(this).val(), 10);
                                        
         var interestingInput = $(this).parent().parent().find(".skill_pipoint");
@@ -77,8 +76,9 @@ $(document).ready(function(){
 
     });
                   
-    $(".skill_pipoint").change(function(){
-                                      
+    // $(".skill_pipoint").change(function(){
+  $(document).on("change", ".skill_pipoint", function() {
+                 
         var pipoint = parseInt($(this).val(), 10);
                                         
         var occupationInput = $(this).parent().parent().find(".skill_careerpoint");

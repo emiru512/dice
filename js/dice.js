@@ -77,8 +77,8 @@ $(document).ready(function(){
       input.attr('placeholder',labeltext);
     
   }
-
-                  $(".save").click(function(){
+                  // $(".save").click(function(){
+                  $(document).on("click", ".save", function() {
                                    
                                    // キャラクターオブジェクトを作成
                                    var data = new Object();
