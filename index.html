@@ -31,7 +31,7 @@ div{
     $.getScript("js/" + gametype + ".js", function(){});
 
     // セーブする要素IDリスト
-    var parameters = "name,occupation,school,comefrom,gender,age,playername,str,con,pow,dex,app,siz,int,edu,rich,san,idea,luck,knowledge,hp,mp,occupationpoint,int10,db";
+    var parameters = "name,occupation,school,comefrom,gender,age,playername,str,con,pow,dex,app,siz,int,edu,rich,san,idea,luck,knowledge,hp,mp,careerpoint,pipoint,db";
     var parameterLabels = parameters.split(',');
     
 </script>
@@ -132,7 +132,7 @@ div{
                 <tr>
                     <th><label for="siz" onclick="">SIZ(体格):</label></th>
                     <td><input id="siz" type="text" placeholder="SIZ" /></td>
-                    <td><button class="2d6p6">2D6+6</button></td>
+                    <td><button class="2d6p6siz">2D6+6</button></td>
                 </tr>
                 <tr>
                     <th><label for="int" onclick="">INT(知性):</label></th>
@@ -195,13 +195,13 @@ div{
                 </tr>
                 
                 <tr>
-                    <th><label for="occupationpoint">職業技能ポイント</label></th>
-                    <td><input id="occupationpoint" type="text" /></td>
+                    <th><label for="careerpoint">職業技能ポイント</label></th>
+                    <td><input id="careerpoint" type="text" /></td>
                 </tr>
                 
                 <tr>
-                    <th><label for="int10">趣味技能ポイント</label></th>
-                    <td><input id="int10" type="text" /></td>
+                    <th><label for="pipoint">趣味技能ポイント</label></th>
+                    <td><input id="pipoint" type="text" /></td>
                 </tr>
                 
                 <tr>
@@ -240,13 +240,11 @@ div{
                 </select>
             </td>
             <td><input id="skill_default" class="skill_defaultpoint" type="text" /></td>
-            <td><input id="skill_occupationpoint" class="skill_occupationpoint" type="text" /></td>
-            <td><input id="skill_interestingpoint" class="skill_interestingpoint" type="text" /></td>
+            <td><input id="skill_careerpoint" class="skill_careerpoint" type="text" /></td>
+            <td><input id="skill_pipoint" class="skill_pipoint" type="text" /></td>
             <td><label id="skill_sum" class="skill_sum"></label></td>
             </th>
         </tr>
-        
-        
         
         </tbody>
         

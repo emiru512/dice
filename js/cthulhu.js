@@ -16,10 +16,30 @@ $(document).ready(function(){
         var csvList = $.csv()(data);
         for (var i = 1; i < csvList.length ; i++) {
           // i=行 0=列
-          var value = csvList[i][1];
+          
           var name = csvList[i][0];
-          $(".skill").append($('<option>').attr({ value: name }).text(name));
-          // id(#name)要素をくわえる？
+          var id = csvList[i][1];
+          var value = csvList[i][2];
+          // $(".skill").append($('<option>').attr({ value: name }).text(name));
+          
+          var careerpointID = id + "careerpoint";
+          var pipointID = id + "pipoint";
+          
+          $("#table_skill > tbody").append('<tr>' +
+                                           '<td>' +
+                                           name +
+                                           '</td>' +
+                                           
+                                           '<td><input id="skill_default" class="skill_defaultpoint" type="text" value="' + value + '" /></td>' +
+                                           '<td><input id="skill_' + careerpointID + '" class="skill_careerpoint" type="text" /></td>' +
+                                           '<td><input id="skill_' + pipointID + '" class="skill_pipoint" type="text" /></td>' +
+                                           '<td><label class="skill_sum"></label></td>' +
+                                           
+                                           '</tr>');
+          
+          // リストにして、id(#name)要素をくわえる？
+          // さらに保存リストにid要素を加える
+          // これでok?
         }
     });
   
@@ -36,42 +56,42 @@ $(document).ready(function(){
                        
     });
                   
-    $(".skill_occupationpoint").change(function(){
+    $(".skill_careerpoint").change(function(){
                                        
-       var occupationPoint = parseInt($(this).val(), 10);
+       var careerpoint = parseInt($(this).val(), 10);
                                        
-        var interestingInput = $(this).parent().parent().find(".skill_interestingpoint");
-        var interestingPoint = parseInt(interestingInput.val(), 10);
+        var interestingInput = $(this).parent().parent().find(".skill_pipoint");
+        var pipoint = parseInt(interestingInput.val(), 10);
                                         
         var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
         var defaultPoint = parseInt(defaultInput.val(), 10);
                                        
-        if (isNaN(interestingPoint)) { interestingPoint = 0; }
-        if (isNaN(occupationPoint)) { occupationPoint = 0; }
+        if (isNaN(pipoint)) { pipoint = 0; }
+        if (isNaN(careerpoint)) { careerpoint = 0; }
         if (isNaN(defaultPoint)) { defaultPoint = 0; }
                                        
-        var sum = interestingPoint + occupationPoint + defaultPoint;
+        var sum = pipoint + careerpoint + defaultPoint;
 
         var label = $(this).parent().parent().find(".skill_sum");
         label.text(sum);
 
     });
                   
-    $(".skill_interestingpoint").change(function(){
+    $(".skill_pipoint").change(function(){
                                       
-        var interestingPoint = parseInt($(this).val(), 10);
+        var pipoint = parseInt($(this).val(), 10);
                                         
-        var occupationInput = $(this).parent().parent().find(".skill_occupationpoint");
-        var occupationPoint = parseInt(occupationInput.val(), 10);
+        var occupationInput = $(this).parent().parent().find(".skill_careerpoint");
+        var careerpoint = parseInt(occupationInput.val(), 10);
                                         
         var defaultInput = $(this).parent().parent().find(".skill_defaultpoint");
         var defaultPoint = parseInt(defaultInput.val(), 10);
                                         
-        if (isNaN(interestingPoint)) { interestingPoint = 0; }
-        if (isNaN(occupationPoint)) { occupationPoint = 0; }
+        if (isNaN(pipoint)) { pipoint = 0; }
+        if (isNaN(careerpoint)) { careerpoint = 0; }
         if (isNaN(defaultPoint)) { defaultPoint = 0; }
                                         
-        var sum = interestingPoint + occupationPoint + defaultPoint;
+        var sum = pipoint + careerpoint + defaultPoint;
 
         var label = $(this).parent().parent().find(".skill_sum");
         label.text(sum);
@@ -82,8 +102,16 @@ $(document).ready(function(){
                         
         var r = random(3, 18, 0);
         var input = prevInput($(this));
-        csv("rich.csv", r, 1, input);
+        csv("rich.csv", r, 1, input, true);
                         
+    });
+                  
+    $(".2d6p6siz").click(function(){
+                       
+       var r = random(2, 12, 6);
+        var input = prevInput($(this));
+        csv("siz.csv", r, 1, input, true);
+        
     });
                   
     $(".1d10p4").click(function(){
@@ -107,7 +135,7 @@ $(document).ready(function(){
         var value = $(this).val();
         $("#idea").val(value * 5);
                      
-                     $("#int10").val(value * 10);
+                     $("#pipoint").val(value * 10);
                     
     });
                   
@@ -126,7 +154,7 @@ $(document).ready(function(){
         var value = $(this).val();
         $("#knowledge").val(value * 5);
                      
-                     $("#occupationpoint").val(value * 20);
+                     $("#careerpoint").val(value * 20);
         
     });
 
@@ -139,14 +167,14 @@ $(document).ready(function(){
       $("#siz").change(function(){
                        
            $("#hp").val(calcHP());
-            $("#db").val(calcDB());
+                       calcDB();
                        
        });
                 
                   
       $("#str").change(function(){
                        
-                       $("#db").val(calcDB());
+                       calcDB();
                        
                        });
                   
@@ -154,7 +182,7 @@ $(document).ready(function(){
                           
               var r = random(1, 10, 0);
               var input = prevInput($(this));
-              csv("shortinsanity.csv", r, 1, input);
+              csv("shortinsanity.csv", r, 1, input, true);
               
               });
                   
@@ -162,7 +190,7 @@ $(document).ready(function(){
                                 
             var r = random(1, 10, 0);
             var input = prevInput($(this));
-            csv("longinsanity.csv", r, 1, input);
+            csv("longinsanity.csv", r, 1, input, true);
             
         });
                   
@@ -182,25 +210,9 @@ function calcDB() {
     var siz = parseInt($("#siz").val(), 10);
     
     var value = str + siz;
+    var input = $("#db");
     
-    if (2 <= value && value <= 12) {
-        return "-1D6";
-    } else if (value <= 16) {
-        return "-1D4";
-    } else if (value <= 24) {
-        return "+-0";
-    } else if (value <= 32) {
-        return "+1D4";
-    } else if (value <= 40) {
-        return "+1D6";
-    } else if (value <= 56) {
-        return "+2D6";
-    } else if (value <= 72) {
-        return "3D6";
-    } else {
-        return "";
-    }
+    csv("db.csv", value, 1, input);
     
-
 }
 

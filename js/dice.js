@@ -11,7 +11,9 @@ function random (first, last, x) {
 };
 
 // 外部csvを読み込み、ダイス目(1列目固定)にそったデータ(2列目以降)をinputにセットする
-function csv (filename, dice, column, input) {
+function csv (filename, dice, column, input, showDice) {
+    
+    if (showDice == null) showDice = false;
     
     var result;
     
@@ -23,8 +25,11 @@ function csv (filename, dice, column, input) {
           
           if (dice == csvList[i][0]) {
           result = csvList[i][column];
-          input.val(result);
-          
+          if (showDice) {
+            input.val(dice + ': ' + result);
+          } else {
+            input.val(result);
+          }
           break;
           }
           }
