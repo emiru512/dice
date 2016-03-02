@@ -26,9 +26,21 @@ function csv (filename, dice, column, input, showDice) {
           if (dice == csvList[i][0]) {
           result = csvList[i][column];
           if (showDice) {
+          
             input.val(dice + ': ' + result);
           } else {
+          
+            var is_element_input = input.is("input");
+          if (is_element_input) {
             input.val(result);
+          }
+          
+          var is_element_label = input.is("label");
+          if (is_element_label) {
+          input.text(result);
+          }
+          
+          
           }
           break;
           }

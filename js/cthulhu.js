@@ -110,7 +110,8 @@ $(document).ready(function(){
                        
        var r = random(2, 12, 6);
         var input = prevInput($(this));
-        csv("siz.csv", r, 1, input, true);
+        // csv("siz.csv", r, 1, input, true);
+        input.val(r).trigger("change"),true;
         
     });
                   
@@ -129,6 +130,15 @@ $(document).ready(function(){
          input.val(r * 10);
          
          });
+                  
+    $("#siz").change(function(){
+                     
+        var value = $(this).val();
+        var label = $("#sizdetail");
+        csv("siz.csv", value, 1, label, false);
+        
+                     
+       });
 
     $("#int").change(function(){
                     
